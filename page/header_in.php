@@ -61,13 +61,13 @@ if (isset($_SESSION['dangnhap'])) {
                 <ul class="nav-bar">
                     <li><a href="../index.php">Trang chủ</a></li>
                     <li><a href="../trangsp/trangspchinh/trangspchinh.php">Cửa Hàng</a></li>
-                    <li><a href="../Lienhe/Lienhe.php">Liên hệ</a></li>
+                    <li><a href="lienhe.php">Liên hệ</a></li>
 
                 </ul>
                 <div class="nav-icon">
                     <a href="cart.php"><i class='bx bx-cart'></i></a>
                     <a href="page/user.php?id=<?php echo $row["id"]; ?>"><i class='bx bx-user'></i> <?php echo $_SESSION['dangnhap']; ?></a>
-                    <a href="page/logout.php">dangxuat</a>
+                    <a href="logout.php">dangxuat</a>
 
                 </div>
             </div>

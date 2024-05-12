@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 12, 2024 lúc 01:50 PM
+-- Thời gian đã tạo: Th5 12, 2024 lúc 08:45 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -40,8 +40,8 @@ CREATE TABLE `orders` (
   `method` varchar(50) NOT NULL,
   `total_products` varchar(100) NOT NULL,
   `total_price` int(100) NOT NULL,
-  `status` int(11) NOT NULL,
-  `order_date` datetime NOT NULL
+  `status` int(11) NOT NULL DEFAULT 0,
+  `order_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,16 +49,18 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`IDorders`, `id`, `receiver`, `phonenumber`, `street`, `ward`, `district`, `city`, `email`, `method`, `total_products`, `total_price`, `status`, `order_date`) VALUES
-(1, 20, 'dff', 'dfsf', 'sdfsd', 'sdf', 'sdfsd', 'dsfsdf', 'haha123@gmail.com', '1', '', 3000000, 1, '2024-05-12 11:44:30'),
-(2, 20, 'dff', 'dfsf', 'sdfsd', 'sdf', 'sdfsd', 'dsfsdf', 'haha123@gmail.com', '1', '', 0, 1, '2024-05-12 11:56:57'),
-(3, 20, 'fdsfsdf', 'sdfsdf', 'sdfsd', 'sdfsdf', 'sdffsf', 'sdfsdf', 'haha123@gmail.com', '1', '', 1850000, 1, '2024-05-12 11:58:53'),
-(4, 20, 'fd', 'dsfsdf', 'sdfsdf', 'dsdfsdfs', 'sdfs', 'dfsdf', 'haha123@gmail.com', '2', '', 1600000, 1, '2024-05-12 12:02:00'),
-(5, 20, 'fwrf', 'ưèwẻ', 'ưẻwr', 'ưẻwẻ', 'ưẻw', 'ưẻwẻ', 'haha123@gmail.com', '1', '', 75000, 1, '2024-05-12 12:03:08'),
-(6, 20, 'dfdf', 'dfewf', 'èwẻ', 'ewrưẻ', 'ưẻwe', 'ưẻwẻ', 'haha123@gmail.com', '1', '', 75000, 1, '2024-05-12 12:05:58'),
-(7, 20, 'jkọkljklmkl', 'klkl;kl;k;', 'kilpklpklp', 'lklpk', 'kjkọkọ', 'huihuihui', 'haha123@gmail.com', '1', '', 1500000, 1, '2024-05-12 12:26:34'),
-(8, 20, 'qưe', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1500000, 1, '2024-05-12 15:25:31'),
-(9, 20, '123', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1750000, 1, '2024-05-12 15:28:09'),
-(17, 20, '123', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1750000, 1, '2024-05-12 15:55:28');
+(1, 20, 'dff', 'dfsf', 'sdfsd', 'sdf', 'sdfsd', 'dsfsdf', 'haha123@gmail.com', '1', '', 3000000, 1, '2024-05-12'),
+(2, 20, 'dff', 'dfsf', 'sdfsd', 'sdf', 'sdfsd', 'dsfsdf', 'haha123@gmail.com', '1', '', 0, 1, '2024-05-12'),
+(3, 20, 'fdsfsdf', 'sdfsdf', 'sdfsd', 'sdfsdf', 'sdffsf', 'sdfsdf', 'haha123@gmail.com', '1', '', 1850000, 1, '2024-05-12'),
+(4, 20, 'fd', 'dsfsdf', 'sdfsdf', 'dsdfsdfs', 'sdfs', 'dfsdf', 'haha123@gmail.com', '2', '', 1600000, 0, '2024-05-12'),
+(5, 20, 'fwrf', 'ưèwẻ', 'ưẻwr', 'ưẻwẻ', 'ưẻw', 'ưẻwẻ', 'haha123@gmail.com', '1', '', 75000, 0, '2024-05-12'),
+(6, 20, 'dfdf', 'dfewf', 'èwẻ', 'ewrưẻ', 'ưẻwe', 'ưẻwẻ', 'haha123@gmail.com', '1', '', 75000, 0, '2024-05-12'),
+(7, 20, 'jkọkljklmkl', 'klkl;kl;k;', 'kilpklpklp', 'lklpk', 'kjkọkọ', 'huihuihui', 'haha123@gmail.com', '1', '', 1500000, 0, '2024-05-12'),
+(8, 20, 'qưe', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1500000, 0, '2024-05-12'),
+(9, 20, '123', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1750000, 0, '2024-05-12'),
+(17, 20, '123', '123', '123', '123', '123', '123', 'haha123@gmail.com', '1', '', 1750000, 0, '2024-05-12'),
+(18, 21, 'baohuy', '0905046373', '9 dường 75', 'tân quy', 'quận 7', 'Hồ chí minh', 'haha123@gmail.com', '1', '', 1500000, 0, '2024-05-13'),
+(19, 21, 'anh triết', '0923857463', '9 dường 75', 'tân quy', 'quận 7', 'Hồ chí minh', 'haha123@gmail.com', '2', '', 1200000, 0, '2024-05-13');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,9 @@ INSERT INTO `orders_detail` (`idDetail`, `IDorders`, `pid`, `quantity`, `subtota
 (7, 7, 10, 1, 1500000),
 (8, 0, 10, 1, 1500000),
 (9, 0, 9, 1, 1750000),
-(10, 17, 9, 1, 1750000);
+(10, 17, 9, 1, 1750000),
+(11, 18, 10, 1, 1500000),
+(12, 19, 11, 1, 1200000);
 
 -- --------------------------------------------------------
 
@@ -215,20 +219,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `street`, `ward`, `district`, `city`, `phonenumber`, `role`, `action`) VALUES
-(8, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(9, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(10, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(11, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(12, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(13, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(14, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(15, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(16, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(17, 'huy', 'huytran123', 'tranhuy19112004@gmail.com', '', '', '', '', 905046373, 0, 0),
-(18, '', '', '', '', '', '', '', 0, 0, 0),
-(19, '', '$2y$10$kccnLGrNQWHKc80VsQRCUem1la5yrwan/52NO/xemPCSJOiU9x4xy', '', '', '', '', '', 0, 0, 0),
-(20, 'anhtriet', '$2y$10$3Yl45G.oRqo.RiF1bU3dWu7UIP2ras.x3eM40Wy2xtu9UeOlACSuy', 'haha123@gmail.com', '', '', '', '', 899517129, 0, 0),
-(21, 'anhtriet123', '$2y$10$tDpLPrsc4uuWdkC29KYiQuyvFmETYt5pOKzcSgJkM3pgvP/X9C89u', 'haha123@gmail.com', '273 an dương vương', '5', '5', 'TP Hồ Chí Minh', 899517129, 0, 0);
+(20, 'anhtriet', '$2y$10$3Yl45G.oRqo.RiF1bU3dWu7UIP2ras.x3eM40Wy2xtu9UeOlACSuy', 'haha123@gmail.com', '', '', '', '', 899517129, 0, 1),
+(21, 'anhtriet123', '$2y$10$tDpLPrsc4uuWdkC29KYiQuyvFmETYt5pOKzcSgJkM3pgvP/X9C89u', 'haha123@gmail.com', '273 an dương vương', '5', '5', 'TP Hồ Chí Minh', 899517129, 0, 0),
+(22, 'admin', 'huytran123', 'tranhuy@gmail.com', '9 đường 75', 'Tân Phong', 'Quận 7', 'Hồ Chí Minh', 95046373, 1, 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -275,13 +268,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `IDorders` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `IDorders` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `orders_detail`
 --
 ALTER TABLE `orders_detail`
-  MODIFY `idDetail` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idDetail` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_category`
@@ -299,7 +292,7 @@ ALTER TABLE `tbl_products`
 -- AUTO_INCREMENT cho bảng `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

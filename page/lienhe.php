@@ -1,3 +1,23 @@
+
+<?php
+require '../require/connect.php';
+// Bắt đầu phiên session nếu chưa được bắt đầu
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Kiểm tra xem biến $_SESSION['taikhoan'] có tồn tại hay không
+if (isset($_SESSION['dangnhap'])) {
+    // echo $_SESSION['dangnhap'];
+} else {
+    // Xử lý trường hợp nếu $_SESSION['taikhoan'] không tồn tại
+    // echo "Không có tài khoản được đăng nhập";
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,26 +35,20 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="head-container">
-            <div class="top-bar">
-                <a href="../index.php" class="logo">
-                    <img src="../images/logo image/Logo image.png" alt="boardgame logo">
-                </a>
-                <ul class="nav-bar">
-                    <li><a href="../index.html">Trang chủ</a></li>
-                    <li><a href="../trangsp.html/trangspchinh/trangspchinh.html">Cửa Hàng</a></li>
-                    <li><a href="../Lienhe/Lienhe.html">Liên hệ</a></li>
-                </ul>
-                <div class="nav-icon">
-                    <a href="../login/html/dangnhap.html"><i class='bx bx-cart' ></i></a>
-                    <a href="../login/html/dangnhap.html"><i class='bx bx-user'></i></a>
+<?php 
+    require '../require/connect.php';
+  
+    $isLogined = false;
+    if (isset($_SESSION['dangnhap'])) {
+        require_once 'header_in.php';
+        $isLogined = true;
+    } else {
+        require_once 'header_out.php';
+    }
 
-
-                </div>
-            </div>
-        </div>
-    </div>
+    // require('page/feature.php')
+    ?>
+    
 
     <div class="border-top">
         <div class="border-container">

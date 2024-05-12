@@ -23,58 +23,7 @@ if (isset($_SESSION['dangnhap'])) {
         require_once 'header-out.php';
     }
     ?>
-     <?php
-     
-//     // Kiểm tra trạng thái của session trước khi bắt đầu một session mới
-//     if (session_status() === PHP_SESSION_NONE) {
-//         session_start();
-//     }
 
-//     // Kiểm tra khi người dùng nhấn nút "Thêm vào giỏ"
-//     if (isset($_POST['addtocart'])) {
-//         // Lấy thông tin sản phẩm từ form
-//         $product_id = $_POST['id'];
-//         $product_image = $_POST['image'];
-//         $product_name = $_POST['name'];
-//         $product_price = $_POST['price'];
-
-//         // Kiểm tra xem session giỏ hàng đã được khởi tạo chưa, nếu chưa thì tạo mới
-//         if (!isset($_SESSION['cart'])) {
-//             $_SESSION['cart'] = array();
-//         }
-
-//         // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-//         $product_index = -1;  
-//         foreach ($_SESSION['cart'] as $index => $product) {
-//             if ($product['id'] == $product_id) {
-//                 $product_index = $index;
-//                 break;
-//             }
-//         }
-
-//         if ($product_index >= 0) {
-//             // Nếu sản phẩm đã tồn tại, tăng số lượng của nó
-//             $_SESSION['cart'][$product_index]['quantity'] += 1;
-//         } else {
-//             // Nếu sản phẩm chưa tồn tại, thêm sản phẩm vào giỏ hàng
-//             $product = array(
-//                 'id' => $product_id,
-//                 'image' => $product_image,
-//                 'name' => $product_name,
-//                 'price' => $product_price,
-//                 'quantity' => 1 // Số lượng ban đầu là 1
-//             );
-//             array_push($_SESSION['cart'], $product);
-//         }
-
-//         // Chuyển hướng người dùng đến trang giỏ hàng
-//         header('Location: ../../assets/cart/cart.php');
-//         exit();
-//     }
-
-//     
-
-?>
 
 
 <?php

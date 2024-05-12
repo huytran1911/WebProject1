@@ -15,7 +15,7 @@ if (isset($_POST['dangnhap'])) {
         if ($row) {
             if ($row['action'] == 1) {
                 $errors['login'] = 'Tài khoản của bạn đã bị khoá và không thể đăng nhập vào trang web.';
-            } else {
+            } else {    
                 if (password_verify($matkhau, $row['password'])) {
                     $_SESSION['dangnhap'] = $taikhoan;
                     header("Location:../../index.php");

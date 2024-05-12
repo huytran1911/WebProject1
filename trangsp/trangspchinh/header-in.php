@@ -61,7 +61,7 @@ if (isset($_SESSION['dangnhap'])) {
                 <ul class="nav-bar">
                     <li><a href="../../index.php">Trang chủ</a></li>
                     <li><a href="trangspchinh.php">Cửa Hàng</a></li>
-                    <li><a href="../../Lienhe/Lienhe.php">Liên hệ</a></li>
+                    <li><a href="../../page/lienhe.php">Liên hệ</a></li>
 
                 </ul>
                 <div class="nav-icon">

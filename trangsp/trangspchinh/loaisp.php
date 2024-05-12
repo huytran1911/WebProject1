@@ -164,7 +164,7 @@ if (isset($_SESSION['dangnhap'])) {
             <div class="wrapper">
                 <div class="search-input">
                     <input type="text" placeholder="Tìm kiếm">
-                    <div class="icon"><a href="../assets/search/search.html"><i class="fas fa-search"></i></a></div>
+                    <div class="icon"><a href="sea.php"><i class="fas fa-search"></i></a></div>
                 </div>
             </div>
         </div>
