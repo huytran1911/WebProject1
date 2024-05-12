@@ -29,12 +29,9 @@ if (isset($_SESSION['dangnhap'])) {
     }
 } else {
     // Xử lý trường hợp nếu $_SESSION['dangnhap'] không tồn tại
-    echo "Không có tài khoản được đăng nhập";
+    // echo "Không có tài khoản được đăng nhập";
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -45,7 +42,7 @@ if (isset($_SESSION['dangnhap'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="icon" type="image/x-png" href="images/logo image/Logo image.png">
+    <link rel="icon" type="image/x-png" href="../../images/logo image/Logo image.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <title>SnakeBoardgame</title>
@@ -55,23 +52,27 @@ if (isset($_SESSION['dangnhap'])) {
     <div class="header">
         <div class="head-container">
             <div class="top-bar">
-                <a href="index.php" class="logo">
-                    <img src="images/logo image/Logo image.png" alt="">
+                <a href="../../index.php" class="logo">
+                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
                 </a>
                 <ul class="nav-bar">
-                    <li><a href="index.php">Trang chủ</a></li>
-                    <li><a href="trangsp/trangspchinh/trangspchinh.php">Cửa Hàng</a></li>
-                    <li><a href="Lienhe/Lienhe.php">Liên hệ</a></li>
+                    <li><a href="../../index.php">Trang chủ</a></li>
+                    <li><a href="trangspchinh.php">Cửa Hàng</a></li>
+                    <li><a href="../../Lienhe/Lienhe.php">Liên hệ</a></li>
 
                 </ul>
                 <div class="nav-icon">
-                    <a href="page/cart.php"><i class='bx bx-cart'></i></a>
-                    <a href="page/user.php?id=<?php echo $row["id"]; ?>"><i class='bx bx-user'></i> <?php echo $_SESSION['dangnhap']; ?></a>
-                    <a href="page/logout.php">dangxuat</a>
+                    <a href="../../login/php/signin.php"><i class='bx bx-cart'></i></a>
+                    <a href="../../login/php/signin.php"><i class='bx bx-user'></i> </a>
+                    
 
                 </div>
             </div>
         </div>
     </div>
+
+    
+
+    
 
     

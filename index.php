@@ -29,6 +29,8 @@
     } else {
         require_once 'page/header-out.php';
     }
+
+    require('page/feature.php')
     ?>
 
 <?php

@@ -1,5 +1,3 @@
-
-
 <?php
 require '../require/connect.php';
 // Bắt đầu phiên session nếu chưa được bắt đầu
@@ -20,7 +18,7 @@ if (isset($_SESSION['dangnhap'])) {
 <?php
 // Kiểm tra trạng thái của session trước khi bắt đầu một session mới
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    
 }
 
 // Kiểm tra khi người dùng nhấn nút "Thêm vào giỏ"
@@ -67,12 +65,14 @@ if (isset($_POST['addtocart'])) {
 
 // Kiểm tra khi người dùng nhấn nút "Xóa sản phẩm khỏi giỏ hàng"
 if (isset($_GET['remove'])) {
-    $product_id = $_GET['remove'];
-    // Tìm vị trí của sản phẩm trong giỏ hàng và xóa nó
-    foreach ($_SESSION['cart'] as $index => $product) {
-        if ($product['id'] == $product_id) {
-            unset($_SESSION['cart'][$index]);
-            break;
+    if(isset($_SESSION['cart'])) {
+        $product_id = $_GET['remove'];
+        // Tìm vị trí của sản phẩm trong giỏ hàng và xóa nó
+        foreach ($_SESSION['cart'] as $index => $product) {
+            if ($product['id'] == $product_id) {
+                unset($_SESSION['cart'][$index]);
+                break;
+            }
         }
     }
     // Chuyển hướng người dùng đến trang giỏ hàng
@@ -81,15 +81,17 @@ if (isset($_GET['remove'])) {
 }
 // Kiểm tra khi người dùng cập nhật số lượng sản phẩm
 if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
-    $product_id = $_POST['product_id'];
-    $new_quantity = $_POST['quantity'];
-    // Tìm vị trí của sản phẩm trong giỏ hàng và cập nhật số lượng mới
-    foreach ($_SESSION['cart'] as $index => $product) {
-        if ($product['id'] == $product_id) {
-            $_SESSION['cart'][$index]['quantity'] = $new_quantity;
-            // Tính toán giá tiền mới
-            $_SESSION['cart'][$index]['total_price'] = calculateNewPrice($product['price'], $new_quantity);
-            break;
+    if(isset($_SESSION['cart'])) {
+        $product_id = $_POST['product_id'];
+        $new_quantity = $_POST['quantity'];
+        // Tìm vị trí của sản phẩm trong giỏ hàng và cập nhật số lượng mới
+        foreach ($_SESSION['cart'] as $index => $product) {
+            if ($product['id'] == $product_id) {
+                $_SESSION['cart'][$index]['quantity'] = $new_quantity;
+                // Tính toán giá tiền mới
+                $_SESSION['cart'][$index]['total_price'] = calculateNewPrice($product['price'], $new_quantity);
+                break;
+            }
         }
     }
     // Chuyển hướng người dùng đến trang giỏ hàng
@@ -104,14 +106,21 @@ function calculateNewPrice($old_price, $new_quantity) {
 } 
 function calculateTotalPrice($cart) {
     $total_price = 0;
-    foreach ($cart as $product) {
-        $total_price += $product['price'] * $product['quantity'];
+    if(isset($cart)) {
+        foreach ($cart as $product) {
+            $total_price += $product['price'] * $product['quantity'];
+        }
     }
     return $total_price;
 }
 ?>
 
-
+<?php
+// Kiểm tra xem $_SESSION['cart'] đã được khởi tạo chưa
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array(); // Khởi tạo giỏ hàng nếu chưa tồn tại
+}
+?>
 
 <style>
         /* Thiết lập CSS cho giao diện */
@@ -238,26 +247,22 @@ function calculateTotalPrice($cart) {
 
 
 <body>
-    <div class="header">
-        <div class="head-container">
-            <div class="top-bar">
-                <a href="../../index.html" class="logo">
-                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
-                </a>
-                <ul class="nav-bar">
-                    <li><a href="../../index.html">Trang chủ</a></li>
-                    <li><a href="../../trangsp.html/trangspchinh/trangspchinh.html">Cửa Hàng</a></li>
-                    <li><a href="../../Lienhe/Lienhe.html">Liên hệ</a></li>
 
-                </ul>
-                <div class="nav-icon">
-                    <a href="../../assets/cart/cart.php"><i class='bx bx-cart'> </i></a>
-                    <a href="../../assets/users/users.php"><i class='bx bx-user'> <?php echo $_SESSION['dangnhap'];?> </i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php 
+    require '../require/connect.php';
+  
+    $isLogined = false;
+    if (isset($_SESSION['dangnhap'])) {
+        require_once 'header_in.php';
+        $isLogined = true;
+    } else {
+        require_once 'header_out.php';
+    }
 
+    // require('page/feature.php')
+    ?>
+    
+                
     <div class="border-top">
         <div class="border-container">
             <div class="box-menu">
@@ -283,6 +288,34 @@ function calculateTotalPrice($cart) {
 
     <!-- Thêm lớp CSS cho danh sách danh mục -->
     
+
+    <div class="menu-list">
+        <div class="menu-container">
+            <div class="cover">
+            <ul class="menu-link none" id="menu-list">
+        <?php
+        // Truy vấn để lấy danh sách danh mục từ cơ sở dữ liệu
+        $sql_categories = "SELECT * FROM tbl_category";
+        $result_categories = mysqli_query($conn, $sql_categories);
+
+        // Kiểm tra xem có danh mục nào hay không
+        if (mysqli_num_rows($result_categories) > 0) {
+            // Hiển thị danh sách các danh mục
+            while ($row_category = mysqli_fetch_assoc($result_categories)) {
+                echo "<li><a href='./trangsp/trangspchinh/loaisp.php?cateid=" . $row_category['cateid'] . "'>" . $row_category['categoryName'] . "</a></li>";
+
+            }
+        } else {
+            echo "<li><a href='#'>Không có danh mục</a></li>";
+        }
+        ?>
+    </ul>
+       
+
+        
+            </div>
+        </div>
+    </div>
 
     <div class="menu-list">
         <div class="menu-container">
@@ -383,17 +416,20 @@ function calculateTotalPrice($cart) {
                         
                             
                             <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
-                                <p class="mb-2">Tạm tính: </p> 
-                                <p class="mb-2"></pclass><span><?php echo calculateTotalPrice($_SESSION['cart']); ?></span></p>
-                                
-                            </div>
+    <p class="mb-2">Tạm tính: </p> 
+    <p class="mb-2"></pclass><span><?php echo !empty($_SESSION['cart']) ? calculateTotalPrice($_SESSION['cart']) : 0; ?></span></p>
+</div>
                             <div>
-                            <?php if (calculateTotalPrice($_SESSION['cart']) > 0): ?>
-                                    <a href="checkout.php" class="btn btn-primary btn-danger text-white fw-bold w-100">Thanh toán</a>
-                                <?php else: ?>
-                                    <button class="btn btn-primary btn-danger text-white fw-bold w-100" disabled>Thanh toán</button>
-                                <?php endif; ?>
-                            </div>
+    <?php if (calculateTotalPrice($_SESSION['cart']) > 0): ?>
+        <?php if ($isLogined === false): ?>
+            <a href="login.php" class="btn btn-primary btn-danger text-white fw-bold w-100">Đăng nhập để thanh toán</a>
+        <?php else: ?>
+            <a href="checkout.php" class="btn btn-primary btn-danger text-white fw-bold w-100">Thanh toán</a>
+        <?php endif; ?>
+    <?php else: ?>
+        <button class="btn btn-primary btn-danger text-white fw-bold w-100" disabled>Thanh toán</button>
+    <?php endif; ?>
+</div>
                               
 
                         </div>

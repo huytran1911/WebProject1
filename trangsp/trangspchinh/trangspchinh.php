@@ -12,8 +12,19 @@ if (isset($_SESSION['dangnhap'])) {
     // echo "Không có tài khoản được đăng nhập";
 }
 // ?>
+<?php 
+    require '../../require/connect.php';
 
+    $isLogined = false;
+    if (isset($_SESSION['dangnhap'])) {
+        require_once 'header-in.php';
+        $isLogined = true;
+    } else {
+        require_once 'header-out.php';
+    }
+    ?>
      <?php
+     
 //     // Kiểm tra trạng thái của session trước khi bắt đầu một session mới
 //     if (session_status() === PHP_SESSION_NONE) {
 //         session_start();
@@ -129,6 +140,7 @@ if (isset($_SESSION['dangnhap'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css">
+    <link rel="stylesheet" href="../Chitietsp/chitietspcss/product.css">
     <link rel="stylesheet" href="../../assets/css/trangspchinh.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -181,27 +193,7 @@ if (isset($_SESSION['dangnhap'])) {
 </head>
 
 <body>
-    <div class="header">
-        <div class="head-container">
-            <div class="top-bar">
-                <a href="../../index.php" class="logo">
-                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
-                </a>
-                <ul class="nav-bar">
-                    <li><a href="../../index.php">Trang chủ</a></li>
-                    <li><a href="./trangspchinh.php">Cửa Hàng</a></li>
-                    <li><a href="../../Lienhe/Lienhe.php">Liên hệ</a></li>
-
-                </ul>
-                <div class="nav-icon">
-                    <a href="../../assets/cart/cart.php"><i class='bx bx-cart'> </i></a>
-                    <a href="../../assets/users/users.php"><i class='bx bx-user'> <?php echo $_SESSION['dangnhap'];?> </i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="border-top">
+<div class="border-top">
         <div class="border-container">
             <div class="box-menu">
                 <div class="main-text">
@@ -220,6 +212,37 @@ if (isset($_SESSION['dangnhap'])) {
                 </form>
             </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Thêm lớp CSS cho danh sách danh mục -->
+    
+
+    <div class="menu-list">
+        <div class="menu-container">
+            <div class="cover">
+            <ul class="menu-link none" id="menu-list">
+        <?php
+        // Truy vấn để lấy danh sách danh mục từ cơ sở dữ liệu
+        $sql_categories = "SELECT * FROM tbl_category";
+        $result_categories = mysqli_query($conn, $sql_categories);
+
+        // Kiểm tra xem có danh mục nào hay không
+        if (mysqli_num_rows($result_categories) > 0) {
+            // Hiển thị danh sách các danh mục
+            while ($row_category = mysqli_fetch_assoc($result_categories)) {
+                echo "<li><a href='./trangsp/trangspchinh/loaisp.php?cateid=" . $row_category['cateid'] . "'>" . $row_category['categoryName'] . "</a></li>";
+
+            }
+        } else {
+            echo "<li><a href='#'>Không có danh mục</a></li>";
+        }
+        ?>
+    </ul>
+       
+
+        
             </div>
         </div>
     </div>

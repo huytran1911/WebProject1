@@ -1,4 +1,30 @@
+
 <?php
+// Bắt đầu phiên session nếu chưa được bắt đầu
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Kiểm tra xem biến $_SESSION['taikhoan'] có tồn tại hay không
+if (isset($_SESSION['dangnhap'])) {
+    // echo $_SESSION['dangnhap'];
+} else {
+    // Xử lý trường hợp nếu $_SESSION['taikhoan'] không tồn tại
+    // echo "Không có tài khoản được đăng nhập";
+}
+// ?>
+<?php 
+    require '../../require/connect.php';
+
+    $isLogined = false;
+    if (isset($_SESSION['dangnhap'])) {
+        require_once 'header-in.php';
+        $isLogined = true;
+    } else {
+        require_once 'header-out.php';
+    }
+    ?>
+     <?php
 // Kết nối đến cơ sở dữ liệu và thực hiện truy vấn
 include_once '../../require/connect.php';
 
@@ -49,24 +75,7 @@ if (isset($_GET['pid'])) {
 </head>
 
 <body>
-    <div class="header">
-        <div class="head-container">
-            <div class="top-bar">
-                <a href="../../index.php" class="logo">
-                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
-                </a>
-                <ul class="nav-bar">
-                    <li><a href="../../index.php">Trang chủ</a></li>
-                    <li><a href="./trangspchinh.php">Cửa Hàng</a></li>
-                    <li><a href="../../../Lienhe/Lienhe.html">Liên hệ</a></li>
-                </ul>
-                <div class="nav-icon">
-                    <a href="../../../login/html/dangnhap.html"><i class='bx bx-cart' ></i></a>
-                    <a href="../../../login/html/dangnhap.html"><i class='bx bx-user'></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="border-top">
         <div class="border-container">
@@ -152,8 +161,13 @@ if (isset($_GET['pid'])) {
                             <!-- Số lượng sản phẩm -->
                             <!-- Nút thêm vào giỏ hàng -->
                         </div>
-                        <a href="../../../login/html/dangnhap.html" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Thêm vào giỏ hàng</a>
-                    </div>
+                        <form method="post" action="../../page/cart.php">
+                        <input type="hidden" name="id" value="<?=$product['pid']?>">
+                                    <input type="hidden" name="image" value="<?=$product['img']?>">
+                                    <input type="hidden" name="name" value="<?=$product['productName']?>">
+                                    <input type="hidden" name="price" value="<?=$product['price']?>">
+                        <button class="btn btn-primary shadow-0" type="submit" name="addtocart"> <i class="me-1 fa fa-shopping-basket"></i> Thêm vào giỏ hàng</button>
+                    </form></div>
                 </main>
                 <div class="detail">
                     <!-- Mô tả chi tiết sản phẩm -->

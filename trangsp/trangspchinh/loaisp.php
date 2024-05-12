@@ -1,3 +1,31 @@
+
+<?php
+// Bắt đầu phiên session nếu chưa được bắt đầu
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Kiểm tra xem biến $_SESSION['taikhoan'] có tồn tại hay không
+if (isset($_SESSION['dangnhap'])) {
+    // echo $_SESSION['dangnhap'];
+} else {
+    // Xử lý trường hợp nếu $_SESSION['taikhoan'] không tồn tại
+    // echo "Không có tài khoản được đăng nhập";
+}
+// ?>
+<?php 
+    require '../../require/connect.php';
+
+    $isLogined = false;
+    if (isset($_SESSION['dangnhap'])) {
+        require_once 'header-in.php';
+        $isLogined = true;
+    } else {
+        require_once 'header-out.php';
+    }
+    ?>
+
+
 <?php
     // Step 1: Lấy sản phẩm từ cơ sở dữ liệu
     require_once "../../require/connect.php";
@@ -121,24 +149,7 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="head-container">
-            <div class="top-bar">
-                <a href="../index.html" class="logo">
-                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
-                </a>
-                <ul class="nav-bar">
-                    <li><a href="../index.html">Trang chủ</a></li>
-                    <li><a href="../trangsp.html/trangspchinh/trangspchinh.html">Cửa Hàng</a></li>
-                    <li><a href="../Lienhe/Lienhe.html">Liên hệ</a></li>
-                </ul>
-                <div class="nav-icon">
-                    <a href="../login/html/dangnhap.html"><i class='bx bx-cart'></i></a>
-                    <a href="../login/html/dangnhap.html"><i class='bx bx-user'> </i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="border-top">
         <div class="border-container">
@@ -226,15 +237,22 @@
                                     <div class="de-font">
                                         Bấm vào hình ảnh để xem thông tin chi tiết.
                                     </div>
-                                    <div class="price">
-                                        <span><?php echo number_format($product['price'], 0, ',', '.'); ?>đ</span>
-                                        <div class="detail-action">
-                                            <button class="d-flex btn btn-outline-danger add-cart-btn fw-bold " type="submit">
-                                                <i class="fas fa-cart-shopping fs-1 me-0"></i>
-                                                THÊM VÀO GIỎ
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <form method="post" action="../../page/cart.php">
+                            <div class="price">
+                                <span><?php echo number_format($product['price'], 0, ',', '.'); ?>đ</span>
+                                <div class="detail-action">
+                                    <input type="hidden" name="id" value="<?=$product['pid']?>">
+                                    <input type="hidden" name="image" value="<?=$product['img']?>">
+                                    <input type="hidden" name="name" value="<?=$product['productName']?>">
+                                    <input type="hidden" name="price" value="<?=$product['price']?>">
+                                    <button class="d-flex btn btn-outline-danger add-cart-btn fw-bold" type="submit" name="addtocart">
+                                        <i class="fas fa-cart-shopping fs-1 me-0"></i>
+                                        THÊM VÀO GIỎ
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </form>
                                 </div>
                             </div>
                         </li>
