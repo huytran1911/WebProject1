@@ -27,41 +27,146 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
     // Lặp qua từng sản phẩm trong giỏ hàng để thêm vào đơn hàng mới
     foreach ($_SESSION['cart'] as $product_id => $quantity) {
-    // Thêm sản phẩm vào đơn hàng
-    $sql_add_to_order = "INSERT INTO orders_detail (order_id, product_id, quantity) VALUES (?, ?, ?)";
-    $stmt_add_to_order = $conn->prepare($sql_add_to_order);
-    $stmt_add_to_order->bind_param("iii", $order_id, $product_id, $quantity);
-    $stmt_add_to_order->execute();
-}
-
+        // Thêm sản phẩm vào đơn hàng
+        $sql_add_to_order = "INSERT INTO orders_detail (order_id, product_id, quantity) VALUES (?, ?, ?)";
+        $stmt_add_to_order = $conn->prepare($sql_add_to_order);
+        $stmt_add_to_order->bind_param("iii", $order_id, $product_id, $quantity);
+        $stmt_add_to_order->execute();
+    }
 
     // Xóa giỏ hàng sau khi đã thêm vào đơn hàng
     unset($_SESSION['cart']);
 
     echo "Đã tạo đơn hàng thành công!";
 } 
-   
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css">
-<link rel="stylesheet" href="../assets/css/main.css">
-<link rel="stylesheet" href="../assets/cart/cart.css">  
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<link rel="icon" type="image/x-png" href="../images/logo image/Logo image.png">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<title>SnakeBoardgame</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Phần head của HTML -->
+</head>
+<body>
+    <!-- Phần body của HTML -->
+
+    <?php
+    // Kiểm tra xem ID được truyền từ URL có tồn tại và không rỗng
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        // Lấy ID người dùng từ URL
+        $user_id = $_GET['id'];
+
+        // Kiểm tra xem ID có phải là một số nguyên dương hay không
+        if (filter_var($user_id, FILTER_VALIDATE_INT) && $user_id > 0) {
+            // Truy vấn dữ liệu người dùng từ bảng tbl_users dựa trên ID
+            $sql = "SELECT * FROM tbl_users WHERE id = $user_id";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Hiển thị thông tin người dùng
+                $row = $result->fetch_assoc();
+                echo '<h1>Thông Tin Người Dùng</h1>';
+                echo '<div class="user-info">';
+                echo '<p><strong>ID:</strong> ' . $row["id"] . '</p>';
+                echo '<p><strong>Username:</strong> ' . $row["username"] . '</p>';
+                echo '<p><strong>Email:</strong> ' . $row["email"] . '</p>';
+                echo '<p><strong>Địa chỉ:</strong> ' . $row["street"] . ', ' . $row["ward"] . ', ' . $row["district"] . ', ' . $row["city"] . '</p>';
+                echo '<p><strong>Phone:</strong> ' . $row["phonenumber"] . '</p>';
+                echo '</div>';
+            } else {
+                echo "Không có thông tin người dùng nào được tìm thấy.";
+            }
+        } else {
+            echo "ID người dùng không hợp lệ.";
+        }
+    } else {
+        echo "ID người dùng không được cung cấp.";
+    }
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+        // Lấy ID người dùng từ URL
+        $user_id = $_GET['id'];
+
+        // Kiểm tra xem ID có phải là một số nguyên dương hay không
+        if (filter_var($user_id, FILTER_VALIDATE_INT) && $user_id > 0) {
+            // Truy vấn dữ liệu chi tiết đơn hàng từ bảng orders_detail và tbl_products dựa trên ID người dùng
+            $sql = "SELECT od.*, p.productName, p.price, u.street, u.district, u.ward, u.city, o.order_date
+            FROM orders_detail od
+            INNER JOIN tbl_products p ON od.pid = p.pid
+            INNER JOIN orders o ON od.IDorders = o.IDorders
+            INNER JOIN tbl_users u ON o.id = u.id
+            WHERE o.id = $user_id";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                echo '<h1>Lịch Sử Đơn Hàng</h1>';
+
+                // Khởi động mảng để lưu trữ thông tin đơn hàng
+                $orderDetails = array();
+
+                // Lặp qua kết quả truy vấn
+                while ($row = $result->fetch_assoc()) {
+                    // Kiểm tra xem IDorders đã được thêm vào mảng chưa
+                    if (!isset($orderDetails[$row["IDorders"]])) {
+                        // Nếu chưa, thêm IDorders vào mảng với thông tin đơn hàng
+                        $orderDetails[$row["IDorders"]] = array(
+                            "IDorders" => $row["IDorders"],
+                            "street" => $row["street"],
+                            "ward" => $row["ward"],
+                            "district" => $row["district"],
+                            "city" => $row["city"],
+                            "order_date" => $row["order_date"],
+                            "total_price" => 0, // Khởi tạo tổng giá trị của đơn hàng
+                            "products" => array() // Mảng để lưu trữ thông tin sản phẩm
+                        );
+                    }
+
+                    // Thêm thông tin sản phẩm vào mảng sản phẩm của đơn hàng
+                    $orderDetails[$row["IDorders"]]["products"][] = array(
+                        "productName" => $row["productName"],
+                        "price" => $row["price"]
+                    );
+
+                    // Tính tổng giá trị của đơn hàng
+                    $orderDetails[$row["IDorders"]]["total_price"] += $row["price"];
+                }
+
+                // Hiển thị thông tin đơn hàng
+                echo '<h1>Lịch Sử Đơn Hàng</h1>';
+                foreach ($orderDetails as $order) {
+                    echo '<div class="order-info">';
+                    echo '<p><strong>ID Detail:</strong> ' . $order["IDorders"] . '</p>';
+                    // Hiển thị thông tin sản phẩm
+                    foreach ($order["products"] as $product) {
+                        // echo '<p><strong>Sản Phẩm:</strong> ' . $product["productName"] . '</p>';
+                        // echo '<p><strong>Giá:</strong> ' . $product["price"] . '</p>';
+                    }
+                    echo '<p><strong>Tổng Giá Trị:</strong> ' . $order["total_price"] . '</p>';
+                    echo '<p><strong>Địa chỉ:</strong> ' . $order["street"] . ', ' . $order["ward"] . ', ' . $order["district"] . ', ' . $order["city"] . '</p>';
+                    echo '<p><strong>Ngày đặt hàng:</strong> ' . $order["order_date"] . '</p>';
+                    // Tạo nút xem chi tiết đơn hàng
+        echo '<form action="chitiethd.php" method="post">';
+        echo '<input type="hidden" name="order_id" value="' . $order["IDorders"] . '">';
+        echo '<input type="submit" value="Xem Chi Tiết">';
+        echo '</form>';
+        echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo "Không có thông tin đơn hàng nào được tìm thấy.";
+            }
+        } else {
+            echo "ID người dùng không hợp lệ.";
+        }
+    }
+    ?>
+
+</body>
+</html>
+
+<?php
+// Đóng kết nối
+$conn->close();
+?>
 <style>
     /* CSS cho phần đăng nhập */
     .user-info-container {
@@ -122,110 +227,3 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         background-color: #0056b3;
     }
 </style>
-</head>
-<body>
-<div class="header">
-    <!-- Mã HTML cho phần header -->
-</div>
-
-<div class="border-top">
-    <!-- Mã HTML cho phần border-top -->
-</div>
-
-<div class="container">
-    <!-- Phần đăng nhập -->
-    <div class="user-info-container">
-        <?php
-        // Hiển thị thông tin đăng nhập
-        if (isset($_SESSION['dangnhap'])) {
-            echo '<h1>Thông Tin Đăng Nhập</h1>';
-            echo '<p><strong>Tên Đăng Nhập:</strong> ' . $_SESSION['dangnhap'] . '</p>';
-            // Thêm các thông tin khác của người dùng tại đây nếu cần
-        } else {
-            echo '<p>Không có tài khoản được đăng nhập.</p>';
-        }
-        ?>
-    </div>
-
-    <!-- Lịch sử đơn hàng -->
-    <div class="order-info-container">
-        <?php
-        // Kiểm tra xem ID được truyền từ URL có tồn tại và không rỗng
-        if(isset($_GET['id']) && !empty($_GET['id'])) {
-            // Lấy ID người dùng từ URL
-            $user_id = $_GET['id'];
-
-            // Kiểm tra xem ID có phải là một số nguyên dương hay không
-            if (filter_var($user_id, FILTER_VALIDATE_INT) && $user_id > 0) {
-                // Truy vấn dữ liệu người dùng từ bảng tbl_users dựa trên ID
-                $sql = "SELECT * FROM tbl_users WHERE id = $user_id";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // Hiển thị thông tin người dùng
-                    $row = $result->fetch_assoc();
-                    echo '<h1>Thông Tin Người Dùng</h1>';
-                    echo '<div class="user-info">';
-                    echo '<p><strong>ID:</strong> ' . $row["id"] . '</p>';
-                    echo '<p><strong>Username:</strong> ' . $row["username"] . '</p>';
-                    echo '<p><strong>Email:</strong> ' . $row["email"] . '</p>';
-                    echo '<p><strong>Địa chỉ:</strong> ' . $row["street"] . ', ' . $row["ward"] . ', ' . $row["district"] . ', ' . $row["city"] . '</p>';
-                    echo '<p><strong>Phone:</strong> ' . $row["phonenumber"] . '</p>';
-                    echo '</div>';
-                } else {
-                    echo "Không có thông tin người dùng nào được tìm thấy.";
-                }
-            } else {
-                echo "ID người dùng không hợp lệ.";
-            }
-        } else {
-            echo "ID người dùng không được cung cấp.";
-        }
-
-        if (isset($_GET['id']) && !empty($_GET['id'])) {
-            // Lấy ID người dùng từ URL
-            $user_id = $_GET['id'];
-
-            // Kiểm tra xem ID có phải là một số nguyên dương hay không
-            if (filter_var($user_id, FILTER_VALIDATE_INT) && $user_id > 0) {
-                // Truy vấn dữ liệu chi tiết đơn hàng từ bảng orders_detail và tbl_products dựa trên ID người dùng
-                $sql = "SELECT od.*, p.productName, p.price, u.street, u.district, u.ward, u.city, o.order_date
-                FROM orders_detail od
-                INNER JOIN tbl_products p ON od.pid = p.pid
-                INNER JOIN orders o ON od.IDorders = o.IDorders
-                INNER JOIN tbl_users u ON o.id = u.id
-                WHERE o.id = $user_id";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    echo '<h1>Lịch Sử Đơn Hàng</h1>';
-
-                    // Hiển thị thông tin chi tiết đơn hàng
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="order-info">';
-                        echo '<p><strong>ID Detail:</strong> ' . $row["IDorders"] . '</p>';
-                        echo '<p><strong>Sản Phẩm:</strong> ' . $row["productName"] . '</p>';
-                        echo '<p><strong>Số Lượng:</strong> ' . $row["quantity"] . '</p>';
-                        echo '<p><strong>Giá:</strong> ' . $row["price"] . '</p>';
-                        echo '<p><strong>Địa chỉ:</strong> ' . $row["street"] . ', ' . $row["ward"] . ', ' . $row["district"] . ', ' . $row["city"] . '</p>';
-                        echo '<p><strong>Ngày đặt hàng:</strong> ' . $row["order_date"] . '</p>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo "Không có thông tin đơn hàng nào được tìm thấy.";
-                }
-            } else {
-                echo "ID người dùng không hợp lệ.";
-            }
-        }
-        ?>
-    </div>
-</div>
-
-</body>
-</html>
-
-<?php
-// Đóng kết nối
-$conn->close();
-?>
