@@ -109,7 +109,7 @@ if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
     // Kiểm tra xem ID có phải là một số nguyên dương hay không
     if (filter_var($order_id, FILTER_VALIDATE_INT) && $order_id > 0) {
         // Truy vấn dữ liệu chi tiết đơn hàng từ bảng orders_detail và tbl_products dựa trên ID đơn hàng
-        $sql = "SELECT od.*, p.productName, p.price, u.street, u.district, u.ward, u.city, o.order_date
+        $sql = "SELECT od.*, p.productName, p.price, u.street, u.district, u.ward, u.city, o.receiver, o.order_date
         FROM orders_detail od
         INNER JOIN tbl_products p ON od.pid = p.pid
         INNER JOIN orders o ON od.IDorders = o.IDorders
@@ -150,11 +150,15 @@ if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
             }
 
             // Hiển thị thông tin đơn hàng
-            echo '<h1>Chi Tiết Đơn Hàng</h1>';
+                echo '<h1>Chi Tiết Đơn Hàng</h1>';
             foreach ($orderDetails as $order) {
                 echo '<div class="order-info">';
                 echo '<p><strong>Mã Đơn Hàng:</strong> ' . $order["IDorders"] . '</p>';
-                echo '<p><strong>Người Nhận:</strong> ' . $order["receiver"] . '</p>';
+                if (isset($order["receiver"])) {
+                    echo '<p><strong>Người Nhận:</strong> ' . $order["receiver"] . '</p>';
+                } else {
+                    echo '<p><strong>Người Nhận:</strong> Thông tin không khả dụng</p>';
+                }
                 echo '<p><strong>Địa chỉ:</strong> ' . $order["street"] . ', ' . $order["ward"] . ', ' . $order["district"] . ', ' . $order["city"] . '</p>';
                 echo '<p><strong>Ngày đặt hàng:</strong> ' . $order["order_date"] . '</p>';
                 echo '<p><strong>Sản Phẩm:</strong></p>';
