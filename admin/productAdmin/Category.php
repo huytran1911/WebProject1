@@ -40,61 +40,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../admin-css/admin.css">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>Admin</title>
+    <link rel="stylesheet" href="../admin-css/admin.css">
+    <link rel="icon" type="image/png" href="assets/img/LOGO.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        .product-image {
+            max-width: 200px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body style="background-color: #f3f8ff;">
-  <input type="checkbox" id="menu-toggle">
-  <div class="sidebar">
-   <div class="side-header">
-   
-   </div>
-   
-   <div class="side-content" style="background-color: #f3f8ff; border-right: 1px solid #000;">
-       <div class="profile">
-           <div class="profile">
-               <img src="/asset/images/1.png" alt="Logo" style="width: 100%; height: auto;">
-               <h3 style="color: #74767d; font-weight: bold;">PET FOOD</h3> 
-           </div>
-       </div>
-
-       <div class="side-menu">
-             <ul>
-                 
-                 <li style="margin-bottom: 15px;" >
+<input type="checkbox" id="menu-toggle">
+<div class="sidebar">
+    <div class="side-header"></div>
+    <div class="side-content" style="background-color: #f3f8ff; border-right: 1px solid #000;">
+        <div class="profile">
+        <img src="../../images/logo image/Logo image.png" alt="Logo" style="height: auto; width: 100px;">
+            <h3 style="color: #74767d; font-weight: bold;">Snake boardgame</h3>
+        </div>
+        <div class="side-menu">
+            <ul>
+                <li style="margin-bottom: 15px;">
                     <a href="../userAdmin/admin-user.php">
-                         <span class="las la-user-alt" style="color:#74767d;"></span>
-                         <h3 style="color: #74767d; font-weight: bold;">Khách Hàng</h3>
-                     </a>
-                 </li>
-
-                 <li style="margin-bottom: 15px;">
+                        <span class="las la-user-alt" style="color:#74767d;"></span>
+                        <h3 style="color: #74767d; font-weight: bold;">Khách Hàng</h3>
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
                     <a href="./Category.php">
                         <span class="las la-address-card" style="color: #74767d;"></span>
                         <h3 style="color: #74767d; font-weight: bold;">Danh Mục</h3>
                     </a>
                 </li>
-              
-                 <li style="margin-bottom: 15px;">
+                <li style="margin-bottom: 15px;">
                     <a href="./admin-product.php">
-                         <span class="las la-clipboard-list" style="color:#74767d;"></span>
-                         <h3 style="color: #74767d; font-weight: bold;">Sản Phẩm</h3>
-                     </a>
-                 </li>
-                 <li style="margin-bottom: 15px;">
-                    <a href="./admin-order.php">
-                         <span class="las la-shopping-cart" style="color:#74767d;"></span>
-                         <h3 style="color: #74767d; font-weight: bold;">Đơn Hàng</h3>
-                     </a>
-                 </li>
-           
-             </ul>
-         </div>
-   </div>
+                        <span class="las la-clipboard-list" style="color:#74767d;"></span>
+                        <h3 style="color: #74767d; font-weight: bold;">Sản Phẩm</h3>
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="../admin-order.php">
+                        <span class="las la-shopping-cart" style="color:#74767d;"></span>
+                        <h3 style="color: #74767d; font-weight: bold;">Đơn Hàng</h3>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
    <div class="main-content" style="background-color: #f3f8ff;">

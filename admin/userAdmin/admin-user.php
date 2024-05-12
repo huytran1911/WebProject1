@@ -65,10 +65,10 @@
     
     <div class="side-content" style="background-color: #f3f8ff; border-right: 1px solid #000;">
         <div class="profile">
-            <div class="profile">
-                <img src="/asset/images/1.png" alt="Logo" style="width: 100%; height: auto;">
-                <h3 style="color: #74767d; font-weight: bold;">PET FOOD</h3> 
-            </div>
+        <div class="profile">
+        <img src="../../images/logo image/Logo image.png" alt="Logo" style="height: auto; width: 100px;">
+            <h3 style="color: #74767d; font-weight: bold;">Snake boardgame</h3>
+        </div>
         </div>
 
         <div class="side-menu">
@@ -81,7 +81,7 @@
                  </li>
 
                  <li style="margin-bottom: 15px;">
-                    <a href="./Category.php">
+                    <a href="../productAdmin/Category.php">
                         <span class="las la-address-card" style="color: #74767d;"></span>
                         <h3 style="color: #74767d; font-weight: bold;">Danh Mục</h3>
                     </a>
@@ -94,7 +94,7 @@
                      </a>
                  </li>
                  <li style="margin-bottom: 15px;">
-                    <a href="./admin-order.php">
+                    <a href="../admin-order.php">
                          <span class="las la-shopping-cart" style="color:#74767d;"></span>
                          <h3 style="color: #74767d; font-weight: bold;">Đơn Hàng</h3>
                      </a>

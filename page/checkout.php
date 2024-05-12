@@ -72,6 +72,8 @@ if (isset($_SESSION['dangnhap'])) {
         .show {
             display: block;
         }
+
+        
     </style>
     <style>
         /* CSS cho phần form nhập thông tin giao hàng */
@@ -251,8 +253,8 @@ if(isset($_POST['thanhtoan'])){
     $phuongthucthanhtoan = $_POST['phuongthucthanhtoan'];
 
     // Thêm đơn hàng vào bảng orders
-    $sql_order = "INSERT INTO `orders` (`id`, `receiver`, `phonenumber`, `street`, `ward`, `district`, `city`, `email`, `method`, `total_products`, `total_price`, `status`, `order_date`) 
-            VALUES ('$user_id', '$hoten', '$sodt', '$sonha_tenduong', '$phuong', '$quan', '$thanhpho', '".$row['email']."', '$phuongthucthanhtoan', '', '$total_price', 1, NOW())";
+    $sql_order = "INSERT INTO `orders` (`id`, `receiver`, `phonenumber`, `street`, `ward`, `district`, `city`, `email`, `method`, `total_products`, `total_price`, `order_date`) 
+            VALUES ('$user_id', '$hoten', '$sodt', '$sonha_tenduong', '$phuong', '$quan', '$thanhpho', '".$row['email']."', '$phuongthucthanhtoan', '', '$total_price', NOW())";
 
     if ($conn->query($sql_order) === TRUE) {
         $order_id = $conn->insert_id;

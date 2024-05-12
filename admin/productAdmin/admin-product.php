@@ -60,9 +60,9 @@ $result_products = mysqli_query($conn, $sql_products);
 <div class="sidebar">
     <div class="side-header"></div>
     <div class="side-content" style="background-color: #f3f8ff; border-right: 1px solid #000;">
-        <div class="profile">
-            <img src="/asset/images/1.png" alt="Logo" height: auto;">
-            <h3 style="color: #74767d; font-weight: bold;">PET FOOD</h3>
+    <div class="profile">
+        <img src="../../images/logo image/Logo image.png" alt="Logo" style="height: auto; width: 100px;">
+            <h3 style="color: #74767d; font-weight: bold;">Snake boardgame</h3>
         </div>
         <div class="side-menu">
             <ul>
@@ -85,7 +85,7 @@ $result_products = mysqli_query($conn, $sql_products);
                     </a>
                 </li>
                 <li style="margin-bottom: 15px;">
-                    <a href="./admin-order.php">
+                    <a href="../admin-order.php">
                         <span class="las la-shopping-cart" style="color:#74767d;"></span>
                         <h3 style="color: #74767d; font-weight: bold;">Đơn Hàng</h3>
                     </a>
