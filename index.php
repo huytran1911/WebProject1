@@ -30,7 +30,7 @@
         require_once 'page/header-out.php';
     }
 
-    require('page/feature.php')
+    include('page/feature.php');
     ?>
 
 <?php

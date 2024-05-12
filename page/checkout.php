@@ -147,18 +147,18 @@ if (isset($_SESSION['dangnhap'])) {
     <div class="header">
         <div class="head-container">
             <div class="top-bar">
-                <a href="../../index.html" class="logo">
-                    <img src="../../images/logo image/Logo image.png" alt="boardgame logo">
+                <a href="../index.php" class="logo">
+                    <img src="../images/logo image/Logo image.png" alt="boardgame logo">
                 </a>
                 <ul class="nav-bar">
-                    <li><a href="../../index.html">Trang chủ</a></li>
-                    <li><a href="../../trangsp.html/trangspchinh/trangspchinh.html">Cửa Hàng</a></li>
-                    <li><a href="../../Lienhe/Lienhe.html">Liên hệ</a></li>
+                    <li><a href="../index.php">Trang chủ</a></li>
+                    <li><a href="../trangsp/trangspchinh/trangspchinh.php">Cửa Hàng</a></li>
+                    <li><a href="lienhe.php">Liên hệ</a></li>
 
                 </ul>
                 <div class="nav-icon">
-                    <a href="../../assets/cart/cart.php"><i class='bx bx-cart'> </i></a>
-                    <a href="../../assets/users/users.php"><i class='bx bx-user'> <?php echo $_SESSION['dangnhap'];?> </i></a>
+                    <a href="cart.php"><i class='bx bx-cart'> </i></a>
+                    <a href="user.php"><i class='bx bx-user'> <?php echo $_SESSION['dangnhap'];?> </i></a>
                 </div>
             </div>
         </div>
@@ -177,10 +177,8 @@ if (isset($_SESSION['dangnhap'])) {
             </div>
             <div class="wrapper">
             <div class="search-input">
-                <form action="" method="GET"> <!-- Thay đổi action và method -->
-                    <input type="text" name="keyword" placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
-                    <button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit -->
-                </form>
+            <input type="text"  placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
+                    <a href="../trangsp/trangspchinh/search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
             </div>
 
             </div>
