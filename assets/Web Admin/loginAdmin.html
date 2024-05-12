@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang đăng nhập</title>
+    <link rel="stylesheet" href="../../login/css/styledn.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,300,0,0" />
+</head>
+
+<body>
+    <div class="login-card-container" id="account">
+        <div class="form-container">
+            <div class="login-card-header">
+                <h1> Vui lòng đăng nhập </h1>
+            </div>
+            <form id="login" onsubmit="checkAdmin(); return false;"> 
+                <div class="form-item">
+                    <span class="form-item-icon material-symbols-rounded">person</span>
+                    <input type="text" name="username" id="username" class="form-control my-3 py-2"
+                        placeholder="Tên đăng nhập" required> 
+                </div>
+                <div class="form-item">
+                    <span class="form-item-icon material-symbols-rounded">lock</span>
+                    <input type="password" name="password" id="password" class="form-control my-3 py-2"
+                        placeholder="Mật khẩu" required> 
+                </div>
+                <button class="btn btn-success d-block mx-auto mt-3" type="submit">Đăng Nhập</button> 
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var adminInfo = {
+            "username": "admin",
+            "password": "huytran123",
+        };
+
+        function checkAdmin() {
+            var userName = document.querySelector('#username').value; 
+            var password = document.querySelector('#password').value; 
+            if (userName === adminInfo.username && password === adminInfo.password) {
+                window.location.href = '../../assets/Web Admin/user.html';
+                alert('Đã đăng nhập bằng quyền admin.');
+            } else if (userName !== "" && password !== "") {
+                alert('Sai mật khẩu. Vui lòng nhập lại!');
+            }
+        }
+    </script>
+</body>
+</html>

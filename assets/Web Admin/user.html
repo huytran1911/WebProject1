@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+	<link rel="stylesheet" href="../Web Admin/css/admin-user.css">
+
+	<title>Snake Boardgame</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="../Web Admin/user.html" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Snake Boardgame</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="../Web Admin/user.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Khách hàng</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/product.html">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span class="text">Sản phẩm</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/order.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Giỏ hàng</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/istrator.html">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Quản trị viên</span>
+				</a>
+			</li>
+		
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="../../index.html" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Đăng xuất</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<form action="#">
+				<div class="form-input">
+
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			</a>
+			<a href="#" class="profile">
+				<img src="../../images/logo image/Logo image.png">
+			</a>
+			<p>Admin</p>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Khách hàng</h1>
+					<button class="add-btn">Thêm</button> <!-- Nút Add User -->
+				</div>
+					<div id="addModal" class="modal">
+						<div class="modal-content">
+							<h2>Thêm Khách hàng</h2>
+							<form id="addForm">
+								<label for="addName">Tên:</label>
+								<input type="text" id="addName" name="addName"><br><br>
+								<label for="addEmail">Email:</label>
+								<input type="text" id="addEmail" name="addEmail"><br><br>
+								<label for="addPhone">Số điện thoại:</label>
+								<input type="text" id="addPhone" name="addPhone"><br><br>
+								<label for="addAddress">Địa chỉ:</label>
+								<input type="text" id="addAddress" name="addAddress"><br><br>
+								<div class="button-group">
+									<button class="add-btn">Thêm</button>
+									<button type="button" id="cancelAdd">Huỷ</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+		
+			
+
+			<div id="userDetailsModal" class="modal">
+				<div class="modal-content" id="userDetailsContent">
+					<!-- User details will be displayed here -->
+				</div>
+			</div>
+		
+			<div id="editModal" class="modal">
+				<div class="modal-content">
+					<h2>Chỉnh sửa thông tin</h2>
+					<form id="editForm">
+						<label for="editName">Tên:</label>
+						<input type="text" id="editName" name="editName"><br><br>
+						<label for="editEmail">Email:</label>
+						<input type="text" id="editEmail" name="editEmail"><br><br>
+						<label for="editPhone">Số điên thoại:</label>
+						<input type="text" id="editPhone" name="editPhone"><br><br>
+						<label for="editAddress">Địa chỉ:</label>
+						<input type="text" id="editAddress" name="editAddress"><br><br>
+						<div class="button-group">
+							<input type="submit" value="Lưu">
+							<button type="button" id="cancelEdit">Huỷ</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<table id="customerTable">
+				<!-- Table content -->
+			</table>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Danh sách khách hàng</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table id="customerTable">
+						<thead>
+							<tr>
+								<th>Họ tên</th>
+								<th>Email</th>
+								<th>Số điện thoại</th>
+								<th>Địa chỉ</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="../Web Admin/js/admin-user.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../Web Admin/css/admin-order.css">
+
+	<title>AdminHub</title>
+</head>
+<body>
+
+
+	<section id="sidebar">
+		<a href="../Web Admin/user.html" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Snake Boardgame</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="../Web Admin/user.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Khách hàng</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/product.html">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span class="text">Sản phẩm</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/order.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Giỏ hàng</span>
+				</a>
+			</li>
+			<li>
+				<a href="../Web Admin/istrator.html">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Quản trị viên</span>
+				</a>
+			</li>
+		
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="../../index.html" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Đăng xuất</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<form action="#">
+				<div class="form-input">
+
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<a href="#" class="profile">
+				<img src="../../images/logo image/Logo image.png">
+			</a>
+			<p>Admin</p>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Đơn hàng</h1>
+				</div>
+			</div>
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Danh sách đơn hàng</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Tên Khách hàng</th>
+								<th>Ngày đặt hàng</th>
+								<th>Tình trạng</th>
+								<th>Email</th>
+								<th>Số điện thoại</th>
+								<th>Thông tin chi tiết</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<p>Trần Diệp Bảo Huy</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Đã xử lý</span></td>
+								<td>huytran@gmail.com</td>
+								<td>123456789</td>
+								<td><a href="../Web Admin/orderdetail.html">Xem thông tin</a></td>
+							</tr>
+							<tr>
+								<td>
+									<p>Đỗ Anh Triết</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Đã xử lý</span></td>
+								<td>anhtriet@gmail.com</td>
+								<td>123456789</td>
+								<td><a href="#">Xem thông tin</a></td>
+							</tr>
+							<tr>
+								<td>
+									<p>Nguyễn Võ Minh Thư</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Đã xử lý</span></td>
+								<td>minhthu@gmail.com</td>
+								<td>123456789</td>
+								<td><a href="#">Xem thông tin</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="/WebProject/assets/Web Admin/order.html"></script>
+</body>
+</html>
