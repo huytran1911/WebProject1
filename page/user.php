@@ -98,7 +98,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                echo '<h1>Lịch Sử Đơn Hàng</h1>';
+                // echo '<h1>Lịch Sử Đơn Hàng</h1>';
 
                 // Khởi động mảng để lưu trữ thông tin đơn hàng
                 $orderDetails = array();

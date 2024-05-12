@@ -84,3 +84,107 @@
             margin: 5px 0;
         }
         </style>
+
+        <body>
+        <?php
+// Kết nối đến cơ sở dữ liệu
+require '../require/connect.php';
+
+// Bắt đầu phiên session nếu chưa được bắt đầu
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Kiểm tra biến $_SESSION['dangnhap']
+if (!isset($_SESSION['dangnhap'])) {
+    // Nếu không có tài khoản đăng nhập, chuyển hướng hoặc xử lý theo yêu cầu của bạn
+    exit("Không có tài khoản được đăng nhập.");
+}
+
+// Kiểm tra xem ID đơn hàng được truyền từ URL có tồn tại và không rỗng
+if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
+    // Lấy ID đơn hàng từ URL
+    $order_id = $_POST['order_id'];
+
+    // Kiểm tra xem ID có phải là một số nguyên dương hay không
+    if (filter_var($order_id, FILTER_VALIDATE_INT) && $order_id > 0) {
+        // Truy vấn dữ liệu chi tiết đơn hàng từ bảng orders_detail và tbl_products dựa trên ID đơn hàng
+        $sql = "SELECT od.*, p.productName, p.price, u.street, u.district, u.ward, u.city, o.order_date
+        FROM orders_detail od
+        INNER JOIN tbl_products p ON od.pid = p.pid
+        INNER JOIN orders o ON od.IDorders = o.IDorders
+        INNER JOIN tbl_users u ON o.id = u.id
+        WHERE od.IDorders = $order_id";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Khởi động mảng để lưu trữ thông tin đơn hàng
+            $orderDetails = array();
+
+            // Lặp qua kết quả truy vấn
+            while ($row = $result->fetch_assoc()) {
+                // Kiểm tra xem IDorders đã được thêm vào mảng chưa
+                if (!isset($orderDetails[$row["IDorders"]])) {
+                    // Nếu chưa, thêm IDorders vào mảng với thông tin đơn hàng
+                    $orderDetails[$row["IDorders"]] = array(
+                        "IDorders" => $row["IDorders"],
+                        "street" => $row["street"],
+                        "ward" => $row["ward"],
+                        "district" => $row["district"],
+                        "city" => $row["city"],
+                        "order_date" => $row["order_date"],
+                        "total_price" => 0, // Khởi tạo tổng giá trị của đơn hàng
+                        "products" => array() // Mảng để lưu trữ thông tin sản phẩm
+                    );
+                }
+
+                // Thêm thông tin sản phẩm vào mảng sản phẩm của đơn hàng
+                $orderDetails[$row["IDorders"]]["products"][] = array(
+                    "productName" => $row["productName"],
+                    "price" => $row["price"]
+                );
+
+                // Tính tổng giá trị của đơn hàng
+                $orderDetails[$row["IDorders"]]["total_price"] += $row["price"];
+            }
+
+            // Hiển thị thông tin đơn hàng
+            echo '<h1>Chi Tiết Đơn Hàng</h1>';
+            foreach ($orderDetails as $order) {
+                echo '<div class="order-info">';
+                echo '<p><strong>Mã Đơn Hàng:</strong> ' . $order["IDorders"] . '</p>';
+                echo '<p><strong>Người Nhận:</strong> ' . $order["receiver"] . '</p>';
+                echo '<p><strong>Địa chỉ:</strong> ' . $order["street"] . ', ' . $order["ward"] . ', ' . $order["district"] . ', ' . $order["city"] . '</p>';
+                echo '<p><strong>Ngày đặt hàng:</strong> ' . $order["order_date"] . '</p>';
+                echo '<p><strong>Sản Phẩm:</strong></p>';
+                // Hiển thị thông tin sản phẩm
+                foreach ($order["products"] as $product) {
+                    echo '<p>- ' . $product["productName"] . ': ' . $product["price"] . '</p>';
+                }
+                echo '<p><strong>Tổng Giá Trị:</strong> ' . $order["total_price"] . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo "Không có thông tin đơn hàng nào được tìm thấy.";
+        }
+    } else {
+        echo "ID đơn hàng không hợp lệ.";
+    }
+} else {
+    echo "ID đơn hàng không được cung cấp.";
+}
+
+// Đóng kết nối
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
+        </body>
