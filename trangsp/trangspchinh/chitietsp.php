@@ -47,9 +47,7 @@ if (isset($_GET['pid'])) {
 }    
 ?>
 
-<?php
-    include_once "./search.php";
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +90,7 @@ if (isset($_GET['pid'])) {
             <div class="search-input">
                 <form action="" method="GET"> <!-- Thay đổi action và method -->
                     <input type="text" name="keyword" placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
-                    <button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit -->
+                    <a href="./search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
                 </form>
             </div>
 

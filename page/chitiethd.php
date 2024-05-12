@@ -128,6 +128,7 @@ if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
                     // Nếu chưa, thêm IDorders vào mảng với thông tin đơn hàng
                     $orderDetails[$row["IDorders"]] = array(
                         "IDorders" => $row["IDorders"],
+                        "receiver" => $row["receiver"],
                         "street" => $row["street"],
                         "ward" => $row["ward"],
                         "district" => $row["district"],

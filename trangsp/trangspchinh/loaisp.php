@@ -84,9 +84,6 @@ if (isset($_SESSION['dangnhap'])) {
         echo "<p>Không có sản phẩm trong danh mục này.</p>";
     }
 ?>
-<?php
-    include_once "./search.php";
-?>
 
 
 <!DOCTYPE html>
@@ -164,7 +161,7 @@ if (isset($_SESSION['dangnhap'])) {
             <div class="wrapper">
                 <div class="search-input">
                     <input type="text" placeholder="Tìm kiếm">
-                    <div class="icon"><a href="sea.php"><i class="fas fa-search"></i></a></div>
+                    <a href="./search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
                 </div>
             </div>
         </div>

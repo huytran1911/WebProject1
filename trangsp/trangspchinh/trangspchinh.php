@@ -75,9 +75,7 @@ if (isset($_SESSION['dangnhap'])) {
 
 ?>
 
-<?php
-    include_once "./search.php";
-?>
+
     
     
 
@@ -157,7 +155,7 @@ if (isset($_SESSION['dangnhap'])) {
             <div class="search-input">
                 <form action="" method="GET"> <!-- Thay đổi action và method -->
                     <input type="text" name="keyword" placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
-                    <button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit -->
+                    <a href="./search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
                 </form>
             </div>
 
@@ -168,7 +166,7 @@ if (isset($_SESSION['dangnhap'])) {
     <!-- Thêm lớp CSS cho danh sách danh mục -->
     
 
-    <div class="menu-list">
+   <div class="menu-list">
         <div class="menu-container">
             <div class="cover">
             <ul class="menu-link none" id="menu-list">
