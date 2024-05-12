@@ -153,10 +153,10 @@ if (isset($_SESSION['dangnhap'])) {
             </div>
             <div class="wrapper">
             <div class="search-input">
-                <form action="" method="GET"> <!-- Thay đổi action và method -->
-                    <input type="text" name="keyword" placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
-                    <a href="./search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
-                </form>
+               
+                    <input type="text"  placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
+                    <a href="search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
+                
             </div>
 
             </div>

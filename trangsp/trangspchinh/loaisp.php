@@ -160,8 +160,9 @@ if (isset($_SESSION['dangnhap'])) {
             </div>
             <div class="wrapper">
                 <div class="search-input">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <a href="./search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
+                    
+                <input type="text"  placeholder="Tìm kiếm"> <!-- Thêm thuộc tính name để lấy giá trị của ô input -->
+                    <a href="search.php"><button type="submit" class="icon"><i class="fas fa-search"></i></button> <!-- Thay đổi thành nút submit --></a>
                 </div>
             </div>
         </div>
